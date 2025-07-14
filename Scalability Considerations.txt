@@ -1,0 +1,22 @@
+Current Implementation
+	The current script reads the entire file into memory, processes each line, and compares character frequency dictionaries pairwise to group anagrams. This approach 	works well for small to medium datasets (e.g. up to tens of thousands of lines), but becomes inefficient and memory-heavy as input size grows.
+
+
+Handling 10 Million Words
+Challenges
+	Performance: Pairwise comparison of each line with others is O(n²) — impractical for 10 million words.
+	Memory usage: Storing 10 million words and their frequency maps in memory can exceed available RAM on typical machines.
+
+	Solution: Hash-Based Grouping
+		we import defaultdict from collections because it automatically creates a default value in dictionary for a key that doesn't exist yet.
+		each word gets its own key (hash): letters contained in each word sorted in alphabetical order
+			bca hash: abc
+		in one cycle "for" we convert the word into a hash and add it to the dictionary.
+		before this we have converted the file into lines (words) using a "for" cycle, so we get 2 "for cycles": 0(n+n) which is ~0(n)
+
+		this method reduces grouping from O(n²) to roughly O(n) time complexity.
+
+100 billion words
+	100 billion words can be estimated as 0.75 - 1.5 terabyte.
+	typical computer can not handle such an amount of data and create copies easily.
+	general approach is distributed computing. to reduce complexity we can split the whole data into batches by different ways: by words lenth, by presence or absence of a 		letter e.t.c.

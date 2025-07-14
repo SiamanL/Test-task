@@ -1,0 +1,22 @@
+Strategy
+    1. Read the entire file as text.
+    2. Iterate character-by-character, accumulating lines into lists.
+    3. For each line, build a dictionary of character frequencies.
+    4. Compare dictionaries to detect anagram lines.
+    5. Write each group of anagrams to a single line in the output.
+This frequency-based approach is more solid than sorting characters, especially when considering performance with longer lines or repeated characters.
+
+
+Maintainability
+	1. Modular Structure (Future-Proofing): Although the current script is procedural, the use of separate data structures (arr, _lif) makes it easy to refactor into 		functions or classes later.
+	2. Clear Variable Purpose: Lists like arr hold the actual lines, while _lif holds their character frequency maps. This separation improves clarity.
+	3. Encoding Explicitly Set: UTF-8 encoding is enforced to avoid encoding-related bugs on different systems.
+
+Scalability
+	1. Character frequency comparison is efficient for relatively short lines, but can become expensive for long lines or very large files. Using hashes (e.g. from collections.Counter) may help optimize this in future.
+	2. The script uses in-memory storage, which is acceptable for small to moderately large files. For very large files, a refactor to process lines one at a time (streaming) would be necessary.
+
+Performance
+	1. The comparison of character frequency dictionaries is done using Python’s native dict equality (dict1 == dict2), which is efficient.
+	2. The "used" list prevents redundant comparisons.
+	3. The algorithm is roughly O(n²) in worst-case scenarios (e.g. when many lines are potential anagrams), but acceptable for the intended use case.
